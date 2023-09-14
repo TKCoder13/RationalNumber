@@ -1,6 +1,6 @@
 #To Do List
 - [x] toString()
-- [x] add() {not working properly}
+- [x] add() 
 - [x] sub() 
 - [x] multi()
 - [ ] div() {error message}

@@ -28,7 +28,7 @@ public class MainApp {
             System.out.print("(" + lhs + ") / (" + rhs + ") = ");
             result = lhs.div(rhs);
             System.out.println("(" + result + ")");
-        } catch (IllegalArgumentException e) {
+        } catch (ArithmeticException e) {
             System.out.println(e);
         }
 

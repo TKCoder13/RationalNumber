@@ -3,21 +3,23 @@ public class RationalNumber implements RationalNumberInterface {
     private int numerator;
     private int denominator;
 
-
+    // -- Default Constructor
     public RationalNumber() {
         this.numerator = 0;
         this.denominator = 1;
     }
 
-    public RationalNumber(int numerator, int denominator) throws IllegalArgumentException {
+    
+    public RationalNumber(int numerator, int denominator) throws ArithmeticException {
         this.numerator = numerator;
         if (denominator == 0) {
-            throw new IllegalArgumentException("Denominator cannot be 0");
+            throw new ArithmeticException("Denominator cannot be 0");
         } else {
             this.denominator = denominator;
         }  
     }
 
+    // -- Copy Constructor
     public RationalNumber(RationalNumber rhs) {
         this.numerator = rhs.getNumerator();
         this.denominator = rhs.getDenominator();
@@ -61,6 +63,11 @@ public class RationalNumber implements RationalNumberInterface {
         if (currentNumerator < 0) isNegative = !isNegative;
         if (currentDenominator < 0) isNegative = !isNegative;
 
+        currentNumerator = Math.abs(currentNumerator);
+        currentDenominator = Math.abs(currentDenominator);
+        
+        System.out.println("currentNumerator " + currentNumerator);
+        System.out.println("currentDenominator " + currentDenominator);
         int wholeNumber = Math.abs(currentNumerator / currentDenominator);
         int remainder = Math.abs(currentNumerator % currentDenominator);
         String output = "";
@@ -189,16 +196,14 @@ public class RationalNumber implements RationalNumberInterface {
     }
 
     public RationalNumberInterface div(RationalNumberInterface rhs) throws ArithmeticException {
-        RationalNumber output = new RationalNumber();
         try {
             int outNumerator = this.getNumerator() * rhs.getDenominator();
             int outDenominator = this.getDenominator() * rhs.getNumerator();
-            output = new RationalNumber(outNumerator, outDenominator);
+            RationalNumber output = new RationalNumber(outNumerator, outDenominator);
             return output;
         } catch (ArithmeticException a) {
-            System.out.println("Cannot be divisible by 0");
+            throw new ArithmeticException("Cannot be divisible by 0");
         }
-        return output;
     }
 
     public double sqrt() throws ArithmeticException {
