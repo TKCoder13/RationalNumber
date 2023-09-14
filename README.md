@@ -1,10 +1,9 @@
 #To Do List
-- [ ] toString() {negative numbers, wholeNumbers?}
-- [ ] add() {not working properly}
-- [ ] sub() 
-- [ ] multi()
+- [x] toString()
+- [x] add() {not working properly}
+- [x] sub() 
+- [x] multi()
 - [ ] div() {error message}
 - [ ] sqrt() 
 - [x] getGCD()
 - [x] getLCM()
-

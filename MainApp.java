@@ -23,14 +23,14 @@ public class MainApp {
         System.out.print("(" + lhs + ") / (" + rhs + ") = ");
         System.out.println("(" + result + ")");
 
-        // try {
+        try {
             rhs = new RationalNumber();
             System.out.print("(" + lhs + ") / (" + rhs + ") = ");
             result = lhs.div(rhs);
             System.out.println("(" + result + ")");
-        // } catch (IllegalArgumentException e) {
-        //     System.out.println(e);
-        // }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
 
         System.out.print("(" + lhs + ") == (" + rhs + ") = ");
         System.out.println((lhs.equals(rhs) ? "true" : "false"));

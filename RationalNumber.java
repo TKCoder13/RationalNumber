@@ -55,21 +55,50 @@ public class RationalNumber implements RationalNumberInterface {
     public String toString() {
         int currentNumerator = this.getNumerator();
         int currentDenominator = this.getDenominator();
-        int wholeNumber = currentNumerator / currentDenominator;
-        int remainder = currentNumerator % currentDenominator;
+
+        // -- Checks for negative values
+        boolean isNegative = false;
+        if (currentNumerator < 0) isNegative = !isNegative;
+        if (currentDenominator < 0) isNegative = !isNegative;
+
+        int wholeNumber = Math.abs(currentNumerator / currentDenominator);
+        int remainder = Math.abs(currentNumerator % currentDenominator);
         String output = "";
 
-        if (wholeNumber == 0) {
-            if (remainder == 0) {
-                return output + wholeNumber;
+        // -- Reduce improper fractions
+        int gcd = getGCD(remainder, currentDenominator);
+        if (gcd > 1) {
+            remainder = remainder / gcd;
+            currentDenominator = currentDenominator / gcd;
+        }
+
+        if (isNegative) {
+            if (wholeNumber == 0) {
+                if (remainder == 0) {
+                    return output + "-" + wholeNumber;
+                } else {
+                    return output + "-" + remainder + "/" + currentDenominator;
+                }
             } else {
-                return output + remainder + "/" + currentDenominator;
+                if (remainder == 0) {
+                    return output + "-" + wholeNumber;
+                } else {
+                    return output + "-" + wholeNumber + " " + remainder + "/" + currentDenominator;
+                }
             }
         } else {
-            if (remainder == 0) {
-                return output + wholeNumber;
+            if (wholeNumber == 0) {
+                if (remainder == 0) {
+                    return output + wholeNumber;
+                } else {
+                    return output + remainder + "/" + currentDenominator;
+                }
             } else {
-                return output + " " + remainder + "/" + currentDenominator;
+                if (remainder == 0) {
+                    return output + wholeNumber;
+                } else {
+                    return output + wholeNumber + " " + remainder + "/" + currentDenominator;
+                }
             }
         }
     }
@@ -131,11 +160,32 @@ public class RationalNumber implements RationalNumberInterface {
     }
 
     public RationalNumberInterface sub(RationalNumberInterface rhs) {
-        return rhs;
+        int leftNumerator = this.getNumerator() * rhs.getDenominator();
+        int rightNumerator = rhs.getNumerator() * this.getDenominator();
+
+        int tempNumerator = leftNumerator - rightNumerator;
+        int tempDenominator = this.getDenominator() * rhs.getDenominator();
+        
+        int endNumerator;
+        int endDenominator;
+
+        int gcd = getGCD(tempNumerator, tempDenominator);
+        if (gcd == 1) {
+            RationalNumber output = new RationalNumber(tempNumerator, tempDenominator);
+            return output;
+        } else {
+            tempNumerator = tempNumerator / gcd;
+            tempDenominator = tempDenominator / gcd;
+            RationalNumber output = new RationalNumber(tempNumerator, tempDenominator);
+            return output;
+        }
     }
 
     public RationalNumberInterface mult(RationalNumberInterface rhs) {
-        return rhs;
+        int currentNumerator = this.getNumerator() * rhs.getNumerator();
+        int currentDenominator = this.getDenominator() * rhs.getDenominator();
+        RationalNumber output = new RationalNumber(currentNumerator, currentDenominator);
+        return output;
     }
 
     public RationalNumberInterface div(RationalNumberInterface rhs) throws ArithmeticException {
@@ -144,6 +194,7 @@ public class RationalNumber implements RationalNumberInterface {
             int outNumerator = this.getNumerator() * rhs.getDenominator();
             int outDenominator = this.getDenominator() * rhs.getNumerator();
             output = new RationalNumber(outNumerator, outDenominator);
+            return output;
         } catch (ArithmeticException a) {
             System.out.println("Cannot be divisible by 0");
         }
