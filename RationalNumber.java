@@ -20,14 +20,22 @@ public class RationalNumber implements RationalNumberInterface {
     }
 
     // -- Copy Constructor
-    public RationalNumber(RationalNumber rhs) {
+    public RationalNumber(RationalNumber rhs) throws ArithmeticException {
         this.numerator = rhs.getNumerator();
-        this.denominator = rhs.getDenominator();
+        if (denominator == 0) {
+            throw new ArithmeticException("Denominator cannot be 0");
+        } else {
+            this.denominator = rhs.getDenominator();
+        }
     }
 
-    public RationalNumber(RationalNumberInterface lhs) {
+    public RationalNumber(RationalNumberInterface lhs) throws ArithmeticException {
         this.numerator = lhs.getNumerator();
-        this.denominator = this.getDenominator();
+        if (denominator == 0) {
+            throw new ArithmeticException("Denominator cannot be 0");
+        } else {
+            this.denominator = this.getDenominator();
+        }
     }
 
     public int getNumerator() {
@@ -65,9 +73,7 @@ public class RationalNumber implements RationalNumberInterface {
 
         currentNumerator = Math.abs(currentNumerator);
         currentDenominator = Math.abs(currentDenominator);
-        
-        System.out.println("currentNumerator " + currentNumerator);
-        System.out.println("currentDenominator " + currentDenominator);
+
         int wholeNumber = Math.abs(currentNumerator / currentDenominator);
         int remainder = Math.abs(currentNumerator % currentDenominator);
         String output = "";
@@ -118,29 +124,6 @@ public class RationalNumber implements RationalNumberInterface {
             }
         }
         return gcd;
-    }
-
-    private int getLCM(int num1, int num2) {
-        if (num1 == 0 || num2 == 0) {
-            return 0;
-        }
-        num1 = Math.abs(num1);
-        num2 = Math.abs(num2);
-        if (num1 == num2) {
-            return num1;
-        } else if (num1 > num2) {
-            int lcm = num1;
-            while (lcm % num2 != 0) {
-                lcm += num1;
-            }
-            return lcm;
-        } else {
-            int lcm = num2;
-            while (lcm % num1 != 0) {
-                lcm += num2;
-            }
-            return lcm;
-        }
     }
 
     public RationalNumberInterface add(RationalNumberInterface rhs) {

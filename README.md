@@ -3,7 +3,7 @@
 - [x] add() 
 - [x] sub() 
 - [x] multi()
-- [ ] div() {error message}
-- [ ] sqrt() 
+- [x] div() {error message}
+- [x] sqrt() 
 - [x] getGCD()
 - [x] getLCM()

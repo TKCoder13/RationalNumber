@@ -7,38 +7,41 @@ public class MainApp {
         System.out.println(lhs.toString());
         RationalNumberInterface result;
 
-        result = lhs.add(rhs);
-        System.out.print("(" + lhs + ") + (" + rhs + ") = ");
-        System.out.println("(" + result + ")");
-
-        result = lhs.sub(rhs);
-        System.out.print("(" + lhs + ") - (" + rhs + ") = ");
-        System.out.println("(" + result + ")");
-
-        result = lhs.mult(rhs);
-        System.out.print("(" + lhs + ") * (" + rhs + ") = ");
-        System.out.println("(" + result + ")");
-
-        result = lhs.div(rhs);
-        System.out.print("(" + lhs + ") / (" + rhs + ") = ");
-        System.out.println("(" + result + ")");
-
+        
         try {
+            result = lhs.add(rhs);
+            System.out.print("(" + lhs + ") + (" + rhs + ") = ");
+            System.out.println("(" + result + ")");
+    
+            result = lhs.sub(rhs);
+            System.out.print("(" + lhs + ") - (" + rhs + ") = ");
+            System.out.println("(" + result + ")");
+    
+            result = lhs.mult(rhs);
+            System.out.print("(" + lhs + ") * (" + rhs + ") = ");
+            System.out.println("(" + result + ")");
+    
+            result = lhs.div(rhs);
+            System.out.print("(" + lhs + ") / (" + rhs + ") = ");
+            System.out.println("(" + result + ")");
+
             rhs = new RationalNumber();
             System.out.print("(" + lhs + ") / (" + rhs + ") = ");
             result = lhs.div(rhs);
+
             System.out.println("(" + result + ")");
+            System.out.print("(" + lhs + ") == (" + rhs + ") = ");
+            System.out.println((lhs.equals(rhs) ? "true" : "false"));
+    
+            rhs = new RationalNumber(lhs);
+            System.out.print("(" + lhs + ") == (" + rhs + ") = ");
+            System.out.println((lhs.equals(rhs) ? "true" : "false"));
+    
+            
         } catch (ArithmeticException e) {
             System.out.println(e);
         }
-
-        System.out.print("(" + lhs + ") == (" + rhs + ") = ");
-        System.out.println((lhs.equals(rhs) ? "true" : "false"));
-
-        rhs = new RationalNumber(lhs);
-        System.out.print("(" + lhs + ") == (" + rhs + ") = ");
-        System.out.println((lhs.equals(rhs) ? "true" : "false"));
-
+        
         lhs = new RationalNumber(5, 12);
         double dresult = lhs.sqrt();
 
